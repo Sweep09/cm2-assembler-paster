@@ -1,13 +1,11 @@
 import tkinter as tk
-from tkinter import filedialog
-import pyperclip 
+import pyperclip
 
 root = tk.Tk()
 root.withdraw()
-file_path = filedialog.askopenfilename()
 
-processed_code: str = ""
+file_path = tk.filedialog.askopenfilename(title="Select assembler text file")
 with open(file_path, 'r') as file:
-    processed_code = ''.join(line.strip() + '\n' for line in file)
-    pyperclip.copy(processed_code)
+    fix = file.read().replace('\r', '')
+    pyperclip.copy(fix)
     print('copied to clipboard')
